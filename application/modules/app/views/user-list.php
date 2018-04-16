@@ -30,7 +30,7 @@
                                         <a href="<?php echo site_url('app/user-add') ?>">
                                          <button id="newlead"  class="btn green">Add New User <i class="fa fa-plus"></i></button>      
                                         </a>
-                                  </div>
+                                </div>
                                 <div class="tools"></div>
                                  
                             </div>

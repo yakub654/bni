@@ -65,6 +65,24 @@ class Tyfcb extends CI_Controller{
   			}
   	}
 
+    public function tyfedit()
+    {
+        $check =  $this->tyfmodel->tyfEdit($this->input->post('user'));
+        $response  = array('success' => True , 'message' => '', 'linkn' => base_url().'app/tyfcb-list');
+        echo json_encode($response);
+       
+    }
+    
+    public function tyfdelete()
+    {
+      $id = $this->input->post('usr_id');
+      if($this->tyfmodel->tyfDelete($id))
+      {
+        $response = array('success' => True, 'message'=>'', 'linkn'=>base_url().'app/tyfcb-list');
+        echo json_encode($response);
+      }
+
+    }
     
 	
 }

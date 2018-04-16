@@ -62,5 +62,5 @@ $route['app/user-add']	 							    = 'app/User/user_add';
 // $route['dashboard']									= 'User/index';
 $route['app/dashboard']								    = 'app/Login/dashboard';
 $route['app/logout']									= 'app/Login/logout';
-$route['app/tyfcb-list']								= 'app/tyfcb/tyfcb_list';
+$route['app/tyfcb-list']								= 'app/tyfcb/tyfcb_list'; 
 $route['app/references']								= 'app/References/refview';

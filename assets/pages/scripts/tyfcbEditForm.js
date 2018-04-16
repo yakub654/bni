@@ -4,7 +4,7 @@ $(document).ready(function() {
  //          dateFormat: "yy-mm-dd"
  //        });
     
-	$('#tyfcbForm').validate({
+	$('#tyfcbEdit').validate({
 			errorClass: "my-error-class",
 			rules : {
 				user : "required",
@@ -17,7 +17,7 @@ $(document).ready(function() {
 			},
 			messages : {
 
-				 user : "Please select the user name",
+				user : "Please select the user name",
 
 				date : "Please select the date",
 				
@@ -32,11 +32,11 @@ $(document).ready(function() {
 
 			 		try
 			 		{
-			 			var date = document.getElementById('date').value;
+			 			var date = document.getElementById('datedit').value;
 			 			// var date = $('.date-picker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-			 			var Amount = document.getElementById('amount').value;
-			 			var user = $('#user').val();
-			 			var remark = document.getElementById('remark').value;
+			 			var Amount = document.getElementById('amtedit').value;
+			 			var user = document.getElementById('user').value;
+			 			var remark = document.getElementById('rmkedit').value;
 
 			 			data = {
 							date:date,
@@ -44,17 +44,18 @@ $(document).ready(function() {
 							user:user,
 							remark:remark
 						}
+						console.log(data);
 
 						$.ajax({
 							type: "POST",
-		                    url: "Tyfcb/tyfcb_add", 
+		                    url: "Tyfcb/tyfedit/", 
 		                    data:data,
 		                    dataType:"json",
 		                    success:function(response)
 		                    {
 		                    	if(response.success == true)
 								{
-									alert('Added');
+									alert('edited');
 									window.location.href = response.linkn;
 									
 								}

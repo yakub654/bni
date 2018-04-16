@@ -6,6 +6,7 @@ class tyfmodel extends CI_Model{
 	{
 		date_default_timezone_set("Asia/Calcutta"); // date and time
 		$date = date("Y-m-d"); 
+		$date = date("Y-m-d",strtotime("06-08-2017")); 
 		$datestat = date("Y-m-d H-i-s");
 		$tyfcbData = array(
 
@@ -26,9 +27,33 @@ class tyfmodel extends CI_Model{
 
 	public function gettyf()
 	{
-		$sql = "Select * From tyfcb";
+		$sql = "Select * From tyfcb where tyfstatus = 1 ";
 		$query = $this->db->query($sql);
 		$result = $query->result();
 		return $result; 
 	}
+
+	public function tyfEdit($id)
+	{
+		$amount = $this->input->post('Amount');
+		$remark = $this->input->post('remark');
+		$id = $this->input->post('user');
+		date_default_timezone_set("Asia/Calcutta"); // date and time
+		$date = date("Y-m-d");
+		$sql ="Update tyfcb Set tyfcb_amt = '".$amount."' , tyfcb_remark = '".$remark."' , tyfcb_date = '".$date."'  Where usr_id = ".$id."";
+		$query = $this->db->query($sql);
+
+		
+	}
+
+	public function tyfDelete($id)
+	{
+		$sql = "Update tyfcb Set tyfstatus = 0 Where usr_id = ".$id."";
+		$query = $this->db->query($sql);
+		if(!empty($query))
+		{
+			return true;
+	    }
+	}
+
 }	
