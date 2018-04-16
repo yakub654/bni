@@ -38,7 +38,7 @@
                                     <span class="caption-subject bold uppercase">Tyfcb List</span>
                                 </div>
                                 <div class="">                                                      
-                                        <a class="btn green btn-outline sbold" data-toggle="modal" href="#basic"> Add TYFCB
+                                        <a class="btn green btn-outline " data-toggle="modal" href="#basic"> Add TYFCB
                                          <!-- <button id="newlead"  class="btn green">Add New User <i class="fa fa-plus"></i></button> -->      
                                         </a>
                                   </div>
@@ -123,34 +123,25 @@
                                     <thead>
                                         <tr>
                                         	
-                                            <th>Name</th>
-                                            <th>Company Name</th>
-                                            <th>Category</th>
-                                            <th>Email</th>
-                                            <th>Mobile</th>
+                                            <th>User</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Remark</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach($tyf as $key) {?>
                                         <tr>
                                         	
-                                            <td><a href="<?php echo site_url('user-detail')?>">Ashok</a></td> 
-                                            <td>test@gmail.com</td>
-                                            <td>987654321</td>
-                                            <td>8</td>
-                                            <td>About the user</td>
-                                            <td><a href="#" class="btn red btn-dafault pull pull-right">Delete</a></td>
+                                            <td><?php echo $key->usr_id ?></td> 
+                                            <td><?php echo $key->tyfcb_amt ?></td>
+                                            <td><?php echo $key->tyfcb_date ?></td>
+                                            <td><?php echo $key->tyfcb_remark?></td>
+                                            
+                                            <td><a data-toggle="modal" href="#basic" class="btn green btn-outline">Edit</a><a  class="btn red btn-dafault pull pull-right">Delete</a></td>
                                         </tr>
-                                        <tr>
-                                        	
-                                            <td><a href="<?php echo site_url('user-detail')?>">Rahul</a></td>
-                                            <td>test@gmail.com</td>
-                                            <td>987654321</td>
-                                            <td>8</td>
-                                            <td>About the user</td>
-                                            <td><a href="#" class="btn red btn-dafault pull pull-right">Delete</a></td>
-
-                                        </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -17,7 +17,8 @@ class Tyfcb extends CI_Controller{
   	public function tyfcb_list()
   	{
   		$usr_id = $this->session->userdata('usr_id');
-  		$data['users'] = $this->user_add->getUser($usr_id);
+  		$data['users'] = $this->user_add->getUser($usr_id); //displaying users in tyfcb user model
+      $data['tyf'] = $this->tyfmodel->gettyf();
   		$this->load->view('tyfcb-list',$data);
   	}
 
@@ -63,5 +64,7 @@ class Tyfcb extends CI_Controller{
         	    echo json_encode($response);
   			}
   	}
+
+    
 	
 }

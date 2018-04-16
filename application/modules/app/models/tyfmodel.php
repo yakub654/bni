@@ -23,4 +23,12 @@ class tyfmodel extends CI_Model{
 
 	    return $userId;
 	}
+
+	public function gettyf()
+	{
+		$sql = "Select * From tyfcb";
+		$query = $this->db->query($sql);
+		$result = $query->result();
+		return $result; 
+	}
 }	
