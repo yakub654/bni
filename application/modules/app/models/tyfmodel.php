@@ -6,7 +6,7 @@ class tyfmodel extends CI_Model{
 	{
 		date_default_timezone_set("Asia/Calcutta"); // date and time
 		$date = date("Y-m-d"); 
-		$date = date("Y-m-d",strtotime("06-08-2017")); 
+		$date = date("Y-m-d",strtotime($this->input->post('date'))); 
 		$datestat = date("Y-m-d H-i-s");
 		$tyfcbData = array(
 
@@ -39,7 +39,7 @@ class tyfmodel extends CI_Model{
 		$remark = $this->input->post('remark');
 		$id = $this->input->post('user');
 		date_default_timezone_set("Asia/Calcutta"); // date and time
-		$date = date("Y-m-d");
+		$date = date("Y-m-d",strtotime($this->input->post('date')));
 		$sql ="Update tyfcb Set tyfcb_amt = '".$amount."' , tyfcb_remark = '".$remark."' , tyfcb_date = '".$date."'  Where usr_id = ".$id."";
 		$query = $this->db->query($sql);
 

@@ -165,7 +165,7 @@
                                         	
                                             <td><?php echo $key->usr_id ?></td> 
                                             <td><?php echo $key->tyfcb_amt ?></td>
-                                            <td><?php echo $key->tyfcb_date ?></td>
+                                            <td><?php echo date("d-m-Y",strtotime($key->tyfcb_date)) ?></td>
                                             <td><?php echo $key->tyfcb_remark?></td>
                                             
                                             <td><a data-toggle="modal" href="#tyfedit" data-id='<?php echo $key->usr_id?>' class="btn green btn-outline openmodel" data-amt='<?php echo $key->tyfcb_amt ?>' data-rmk='<?php echo $key->tyfcb_remark ?>' data-date='<?php echo $key->tyfcb_date ?>'>Edit</a><button onclick=" return deleteTyf('<?php echo $key->usr_id;?>')" class="btn red btn-dafault pull pull-right">Delete</button></td>

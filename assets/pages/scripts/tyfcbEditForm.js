@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 						$.ajax({
 							type: "POST",
-		                    url: "Tyfcb/tyfedit/", 
+		                    url: "Tyfcb/tyfedit", 
 		                    data:data,
 		                    dataType:"json",
 		                    success:function(response)

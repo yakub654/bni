@@ -33,7 +33,7 @@ $(document).ready(function() {
 			 		try
 			 		{
 			 			var date = document.getElementById('date').value;
-			 			// var date = $('.date-picker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+			 			
 			 			var Amount = document.getElementById('amount').value;
 			 			var user = $('#user').val();
 			 			var remark = document.getElementById('remark').value;

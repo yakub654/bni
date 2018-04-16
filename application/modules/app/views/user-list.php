@@ -48,25 +48,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach($users as $key) {?>
                                         <tr>
-                                        	
-                                            <td><a href="<?php echo site_url('user-detail')?>">Ashok</a></td> 
-                                            <td>test@gmail.com</td>
-                                            <td>987654321</td>
-                                            <td>8</td>
-                                            <td>About the user</td>
-                                            <td><a href="#" class="btn red btn-dafault pull pull-right">Delete</a></td>
+                                            <td><?php   echo $key->usr_name ?></td> 
+                                            <td><?php   echo $key->usr_companyName ?></td>
+                                            <td><?php   echo $key->usr_category ?></td>
+                                            <td><?php   echo $key->usr_email ?></td>
+                                            <td><?php   echo $key->usr_mobile ?></td>
+                                            <td><button onclick=" return deleteUser('<?php echo $key->usr_id;?>')" class="btn red btn-dafault pull pull-right">Delete</button></td>
                                         </tr>
-                                        <tr>
-                                        	
-                                            <td><a href="<?php echo site_url('user-detail')?>">Rahul</a></td>
-                                            <td>test@gmail.com</td>
-                                            <td>987654321</td>
-                                            <td>8</td>
-                                            <td>About the user</td>
-                                            <td><a href="#" class="btn red btn-dafault pull pull-right">Delete</a></td>
-
-                                        </tr>
+                                        <?php   } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -77,6 +68,35 @@
 		<?php $this->load->view('common/footer')?>
 	</div>
     <?php $this->load->view('common/footer_scripts')?>
+    <script >
+        function deleteUser(id)
+            {
+                
+                var cnf = confirm("Are you Sure");
+                if(cnf)
+                {
+                    data = 
+                    {
+                        usr_id:id
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "User/deleteUser",
+                        data:data,
+                        dataType:"json",
+                        success:function(response)
+                        {
+                            window.location.href = response.linkn;
+                            
+                        }
+                    });         
+                }
+                else
+                {
+                    console.log('NO');
+                }
+            }
+    </script>
     <!-- BEGIN PAGE LEVEL PLUGINS -->
        <script src="<?php echo site_url() ?>assets/global/scripts/datatable.js" type="text/javascript"></script>
        <script src="<?php echo site_url() ?>assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>

@@ -59,12 +59,31 @@ class user_add extends CI_Model{
 			return $row;
 	  }
 
-	  public function getUser($usr_id){
+	  public function getUser($usr_id)
+	  {
 
 	  	    $sql = "Select usr_name,usr_id from users where NOT usr_id = ".$usr_id."";
 	  	    $query = $this->db->query($sql);
 			$result = $query->result();
 			return $result;
 
+	  }
+
+	  public function displayUser($usr_id)
+	  {
+	  	$sql = "Select * from users where usr_status = 1 and Not usr_id = ".$usr_id."";
+	  	$query = $this->db->query($sql);
+		$result = $query->result();
+		return $result;
+	  }
+
+	  public function userDelete($id)
+	  {
+	  	$sql = "Update users Set usr_status = 0 Where usr_id = ".$id."";
+		$query = $this->db->query($sql);
+		if(!empty($query))
+		{
+			return true;
+	    }
 	  }
 }

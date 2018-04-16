@@ -23,7 +23,9 @@ class User extends CI_Controller {
 	{
 		if($this->session->userdata('usr_email')!='')
 		{
-			$this->load->view('user-list');
+			$usr_id = $this->session->userdata('usr_id');
+			$data['users'] = $this->user_add->displayUser($usr_id);
+			$this->load->view('user-list',$data);
 		}
 		else
 		{
@@ -110,27 +112,7 @@ class User extends CI_Controller {
 			{
 				$response  = array('success' => True , 'message' => '', 'linkn' => base_url().'app/user-list');
         	    echo json_encode($response);
-			}
-			
-
-			// if($email_data)
-			// {
-			// 	foreach ($email_data as $key)
-			// 	{
-			// 		echo($key->emailAdd);
-			// 	}
-			// }
-			// if($mobile_data)
-			// {
-			// 	foreach ($mobile_data as $key)
-			// 	{
-			// 		echo($key->mobileAdd);
-			// 	}
-			// }
-
-			    // $response  = array('success' => false , 'message' => 'reload');
-       //  	    echo json_encode($response);
-				
+			}		
 		}
 		else
 		{
@@ -156,6 +138,16 @@ class User extends CI_Controller {
 			
 			echo 'true';
 		}
+	}
+
+	public function deleteUser()
+	{
+	      $id = $this->input->post('usr_id');
+	      if($this->user_add->userDelete($id))
+	      {
+	        $response = array('success' => True, 'message'=>'', 'linkn'=>base_url().'app/user-list');
+	        echo json_encode($response);
+	      }
 	}
 
 	
