@@ -95,7 +95,7 @@ CREATE TABLE user_mobile(
 CREATE TABLE references(
 
 		ref_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-		usr_id int,
+		ref_usr_id int,
 		ref_name   varchar(20),
 		ref_email  varchar(20),
 		ref_mobile varchar(25),
@@ -106,5 +106,5 @@ CREATE TABLE references(
 		ref_crtd_on datetime,
 		ref_updt_by int,
 		ref_updt_on timestamp,
-		FOREIGN KEY (usr_id) REFERENCES users(usr_id)
+		FOREIGN KEY (ref_usr_id) REFERENCES users(usr_id)
 );
