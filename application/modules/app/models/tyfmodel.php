@@ -10,13 +10,13 @@ class tyfmodel extends CI_Model{
 		$datestat = date("Y-m-d H-i-s");
 		$tyfcbData = array(
 
-			'tyfcb_date' => $date,
-			'tyfcb_amt'  => $this->input->post('Amount'),
-			'tyfcb_remark' => $this->input->post('remark'),
-			'usr_id' => $this->input->post('user'),
-			'tyfstatus' => '1',
-			'tyfcrtd_by' => $usr_id,
-			'tyfcrtd_on' => $datestat,
+			'tyfcb_date'        => $date,
+			'tyfcb_amt'         => $this->input->post('Amount'),
+			'tyfcb_remark'      => $this->input->post('remark'),
+			'tyfusr_id'         => $this->input->post('user'),
+			'tyfstatus'         => '1',
+			'tyfcrtd_by'        => $usr_id,
+			'tyfcrtd_on'        => $datestat,
  
 	    );
 	    $this->db->insert('tyfcb',$tyfcbData);
@@ -27,7 +27,7 @@ class tyfmodel extends CI_Model{
 
 	public function gettyf()
 	{
-		$sql = "Select * From tyfcb where tyfstatus = 1 ";
+		$sql = "Select *,(Select users.usr_name from users where tyfcb.tyfusr_id = users.usr_id) user_name From tyfcb where tyfstatus = 1 ";
 		$query = $this->db->query($sql);
 		$result = $query->result();
 		return $result; 
@@ -37,10 +37,9 @@ class tyfmodel extends CI_Model{
 	{
 		$amount = $this->input->post('Amount');
 		$remark = $this->input->post('remark');
-		$id = $this->input->post('user');
 		date_default_timezone_set("Asia/Calcutta"); // date and time
 		$date = date("Y-m-d",strtotime($this->input->post('date')));
-		$sql ="Update tyfcb Set tyfcb_amt = '".$amount."' , tyfcb_remark = '".$remark."' , tyfcb_date = '".$date."'  Where usr_id = ".$id."";
+		$sql ="Update tyfcb Set tyfcb_amt = '".$amount."' , tyfcb_remark = '".$remark."' , tyfcb_date = '".$date."'  Where tyfusr_id = ".$id."";
 		$query = $this->db->query($sql);
 
 		
@@ -48,7 +47,7 @@ class tyfmodel extends CI_Model{
 
 	public function tyfDelete($id)
 	{
-		$sql = "Update tyfcb Set tyfstatus = 0 Where usr_id = ".$id."";
+		$sql = "Update tyfcb Set tyfstatus = 0 Where tyfusr_id = ".$id."";
 		$query = $this->db->query($sql);
 		if(!empty($query))
 		{

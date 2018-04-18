@@ -25,14 +25,14 @@ CREATE TABLE tyfcb(
 		tyfcb_date date,
 		tyfcb_amt varchar(20),
 		tyfcb_remark varchar(50),
-		usr_id int,
+		tyfusr_id int,
 		tyfstatus int,
 		tyfcrtd_by int,
 		tyfcrtd_on datetime,
 		tyfupdt_by int,
 		tyfupdt_on timestamp,	
 		PRIMARY KEY (tyfcb_id),
-        FOREIGN KEY (usr_id) REFERENCES users(usr_id)
+        FOREIGN KEY (tyfusr_id) REFERENCES users(usr_id)
 
 );
 

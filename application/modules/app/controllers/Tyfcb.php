@@ -19,6 +19,7 @@ class Tyfcb extends CI_Controller{
   		$usr_id = $this->session->userdata('usr_id');
   		$data['users'] = $this->user_add->getUser($usr_id); //displaying users in tyfcb user model
       $data['tyf'] = $this->tyfmodel->gettyf();
+      print_r($data['tyf']);
   		$this->load->view('tyfcb-list',$data);
   	}
 
@@ -67,7 +68,7 @@ class Tyfcb extends CI_Controller{
 
     public function tyfedit()
     {
-        $check =  $this->tyfmodel->tyfEdit($this->input->post('user'));
+        $check =  $this->tyfmodel->tyfEdit($this->input->post('id'));
         $response  = array('success' => True , 'message' => '', 'linkn' => base_url().'app/tyfcb-list');
         echo json_encode($response);
        

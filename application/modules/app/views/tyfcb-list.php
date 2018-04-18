@@ -28,7 +28,6 @@
 
 
 		<!-- <h1 class="text-center">User List View</h1> -->
-		
 		<div class="row">
                     <div class="col-sm-12">
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -113,7 +112,8 @@
                                                                <!-- Main form--> 
                                                                <div class="form-group">
                                                                     <label >User </label>
-                                                                    <input type="input" name="user" id="user" class="form-control" placeholder="" disabled="">
+                                                                    <input type="input" name="useredit" id="useredit" class="form-control" placeholder="" disabled="">
+                                                                    <input type="hidden" name="id"  id="id">
                                                                     <!-- <select id="user" class="form-control select2" name="user" >
                                                                         <option></option>                                        
                                                                              <?php  foreach($users as $key) { ?>
@@ -144,7 +144,7 @@
                                                 </div>     
                                             </div>    
                                         </div>
-                                       <!-- /.modal-content -->
+                                       
                             </div>     
                     </div>
                             <div class="portlet-body">
@@ -163,12 +163,12 @@
                                         <?php foreach($tyf as $key) {?>
                                         <tr>
                                         	
-                                            <td><?php echo $key->usr_id ?></td> 
+                                            <td><?php echo $key->user_name ?></td> 
                                             <td><?php echo $key->tyfcb_amt ?></td>
-                                            <td><?php echo date("d-m-Y",strtotime($key->tyfcb_date)) ?></td>
+                                            <td><?php echo date("m/d/Y",strtotime($key->tyfcb_date)) ?></td>
                                             <td><?php echo $key->tyfcb_remark?></td>
                                             
-                                            <td><a data-toggle="modal" href="#tyfedit" data-id='<?php echo $key->usr_id?>' class="btn green btn-outline openmodel" data-amt='<?php echo $key->tyfcb_amt ?>' data-rmk='<?php echo $key->tyfcb_remark ?>' data-date='<?php echo $key->tyfcb_date ?>'>Edit</a><button onclick=" return deleteTyf('<?php echo $key->usr_id;?>')" class="btn red btn-dafault pull pull-right">Delete</button></td>
+                                            <td><a data-toggle="modal" href="#tyfedit" data-id='<?php echo $key->tyfusr_id?>' data-user='<?php echo $key->user_name?>' class="btn green btn-outline openmodel" data-amt='<?php echo $key->tyfcb_amt ?>' data-rmk='<?php echo $key->tyfcb_remark ?>' data-date='<?php echo date("m/d/Y", strtotime($key->tyfcb_date)) ?>'>Edit</a><button onclick=" return deleteTyf('<?php echo $key->tyfusr_id;?>')" class="btn red btn-dafault pull pull-right">Delete</button></td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
@@ -229,10 +229,13 @@
             var tyfcb_amt = $(this).data('amt');
             var tyfcb_remark = $(this).data('rmk');
             var tyfcb_date = $(this).data('date');
-            $(".modal-body #amtedit").val(tyfcb_amt);
-            $(".modal-body #rmkedit").val(tyfcb_remark);
-            $(".modal-body #datedit").val(tyfcb_date);
-            $(".modal-body #user").val(tyf_id);
+            var tyfcb_name = $(this).data('user');
+            $(" #amtedit").val(tyfcb_amt);
+            $(" #rmkedit").val(tyfcb_remark);
+            $(" #datedit").val(tyfcb_date);
+            $(" #id").val(tyf_id);
+            $(" #useredit").val(tyfcb_name);
+
            });
        </script>
 </body>
