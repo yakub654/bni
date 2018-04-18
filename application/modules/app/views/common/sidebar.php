@@ -48,7 +48,7 @@
         <li class="nav-item">
             <a href="<?php echo site_url('app/transaction')?>"  class="nav-link">
                 <i class="fa fa-user"></i>
-                <span class="title">transaction</span>
+                <span class="title">Transaction</span>
                 <span class="selected"></span> 
             </a>
         </li>

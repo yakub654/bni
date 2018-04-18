@@ -80,6 +80,94 @@ class References extends CI_Controller{
 
 	public function transview()
 	{
-		$this->load->view('transaction');
+
+		
+		if($this->session->userdata('usr_email')!='')
+		{
+			$data['refask'] = $this->refmodel->getAsk();
+			$data['refgive'] = $this->refmodel->getGive();
+			$this->load->view('transaction',$data);
+		}
+		else
+		{
+			redirect(site_url('app'));
+		}
 	}
+
+	public function transform()
+	{
+
+		
+		if($this->session->userdata('usr_email')!='')
+		{
+			$this->load->view('transadd');
+		}
+		else
+		{
+			redirect(site_url('app'));
+		}
+	}
+
+
+	public function transadd()
+	{
+		// server side validation start 
+
+		//server side validation end
+		$usr_id = $this->session->userdata('usr_id');
+		$userId = $this->refmodel->addTrans($usr_id);
+		if(!empty($userId))
+		{
+			$response  = array('success' => True , 'message' => '', 'linkn' => base_url().'app/transaction');
+            echo json_encode($response);
+		}
+		else
+		{
+			$response  = array('success' => false , 'message' => 'Something went wrong');
+            echo json_encode($response);
+		}
+	}
+
+	public function askEdit()
+	{
+		$usr_id = $this->session->userdata('usr_id');
+		$check = $this->refmodel->editAsk($usr_id);
+		if(!empty($check))
+		{
+			$response  = array('success' => True , 'message' => '', 'linkn' => base_url().'app/transaction');
+            echo json_encode($response);
+		}
+		else
+		{
+			$response  = array('success' => false , 'message' => 'Something went wrong');
+            echo json_encode($response);
+		}
+	}
+
+	public function giveEdit()
+	{
+		$usr_id = $this->session->userdata('usr_id');
+		$check = $this->refmodel->editGive($usr_id);
+		if(!empty($check))
+		{
+			$response  = array('success' => True , 'message' => '', 'linkn' => base_url().'app/transaction');
+            echo json_encode($response);
+		}
+		else
+		{
+			$response  = array('success' => false , 'message' => 'Something went wrong');
+            echo json_encode($response);
+		}
+	}
+
+	public function deleteTrans()
+	{
+		$id = $this->input->post('usr_trans_id');
+	    if($this->refmodel->transDelete($id))
+	    {
+	       $response = array('success' => True, 'message'=>'', 'linkn'=>base_url().'app/transaction');
+	       echo json_encode($response);
+	    }	
+	}
+
 }

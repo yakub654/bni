@@ -11,7 +11,8 @@ class Login extends CI_Controller {
 		$this->load->model('user_add');
 		$this->load->model('loginUser');
 		$this->load->helper('cookie');
-		
+		$this->load->helper('string');
+		$this->load->library('email');
 	}
 
 
@@ -105,5 +106,50 @@ class Login extends CI_Controller {
 		delete_cookie('email');
 		redirect(base_url().'app');
 
+	}
+
+	public function forgetPass()
+	{
+		$email = $this->input->post('email');
+		$validator = $this->user_add->validate_Email($email);
+		if(!empty($validator))
+		{
+			$randompass = random_string('alnum',10);
+			// hashing and storing that function in database
+
+			//end of storig
+
+	
+			
+			// email to the user
+			$config['protocol'] = 	  "smtp";
+			$config['smtp_host'] =    "ssl://smtp.gmail.com";
+			$config['smtp_user'] =    "ykhan707@gmail.com";
+			$config['smtp_pass'] =    "Demon_down";
+			$config['smtp_port'] =     465;
+			$config['_smtp_auth'] =   "TRUE";
+			$config['charset'] =      "utf-8";
+			$config['wordwrap'] =     "TRUE";
+			$config['newline']    =   "\r\n";
+			$this->email->initialize($config);
+			echo 'executed';
+			$this->email->from('ykhan707@gmail.com', 'Yakub');
+			$this->email->to($email);
+			$this->email->subject('Forget Test');
+			$this->email->message($randompass);
+			if ($this->email->send()) 
+			{
+				echo 'email send';
+			}
+			else
+			{
+				echo 'Not Send';
+			}
+
+		}
+		else
+		{
+			echo 'not';
+		}
 	}
 }

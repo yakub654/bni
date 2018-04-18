@@ -1,48 +1,44 @@
 $(document).ready(function() {
 
-	$('#Login').validate({
+		$('#fpassword').validate({
 
 		errorClass: "my-error-class",
         validClass: "my-valid-class",
 		rules : {
-			email : {
-				required : true
-			},
+			emailforget : {
+				
+				email   : true
+			}
 
-			password : {
-				required : true
-			},
+			
 
 		},
 
 		messages : {
 
-			email : {
-				required : "Please enter the email"
-			},
+			emailforget : {
+				
+				email    : "please enter the valid email"
+			}
 
-			password : {
-				required : "Please enter the password"
-			},
+			
 		},
 
 		submitHandler : function(form)
 		{
 			try
 			{
-				var email    = document.getElementById('email').value;
-				var password = document.getElementById('password').value;
-				var remember = document.querySelector('.ischecked').checked;
+				var email    = document.getElementById('emailforget').value;
+				
 
 				data = {
-					email:email,
-					password:password,
-					remember:remember
+					email:email
+					
 				}
 				console.log(data)
 				$.ajax({
 						type: "POST",
-	                    url: "app/Login/login_Users", 
+	                    url: "app/Login/forgetPass", 
 	                    data:data,
 	                    dataType:"json",
 				success:function(response)
@@ -74,7 +70,5 @@ $(document).ready(function() {
 
 	});
 
-
-	
 
 });

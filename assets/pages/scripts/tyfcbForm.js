@@ -1,9 +1,6 @@
 $(document).ready(function() {
     
-	// $( ".date" ).datepicker({
- //          dateFormat: "yy-mm-dd"
- //        });
-    
+
 	$('#tyfcbForm').validate({
 			errorClass: "my-error-class",
 			rules : {
