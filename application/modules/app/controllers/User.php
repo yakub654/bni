@@ -10,6 +10,8 @@ class User extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('app/user_add');
 		$this->load->model('app/loginUser');
+		// $this->output->enable_profiler(TRUE);
+
 	
 	}
 

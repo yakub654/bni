@@ -518,3 +518,8 @@ define('INVOICE_SALE_PRODUCT', '2');
 /****Invoice Purchase product TYPE  ******/
 
 define('SOCIAL_LINKS', 'social_links');
+
+/****Forget Password mail****/
+
+define('Email_MESSAGE','Hi,we received a request to change password from you, click the link  to do so : %RESET_LINK%');
+

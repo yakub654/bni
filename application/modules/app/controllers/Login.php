@@ -111,40 +111,48 @@ class Login extends CI_Controller {
 	public function forgetPass()
 	{
 		$email = $this->input->post('email');
-		$validator = $this->user_add->validate_Email($email);
-		if(!empty($validator))
+		$data['email'] = $this->loginUser->getUserForget($email);
+		
+		if(!empty($data['email']))
 		{
-			$randompass = random_string('alnum',10);
-			// hashing and storing that function in database
+			$randompass = random_string('alnum',15);
+			$data['string'] = $randompass;
+			// storing that string  in database 
+			$insert = $this->loginUser->addForget($data);
+			//end of storing
+			//message for the email
+			$message = Email_MESSAGE;
+			$link = base_url().'app/forget-Password/'.$randompass;
+			$messagefinal = str_replace("%RESET_LINK%",$link,$message);
 
-			//end of storig
-
+			//end
 	
 			
 			// email to the user
-			$config['protocol'] = 	  "smtp";
-			$config['smtp_host'] =    "ssl://smtp.gmail.com";
-			$config['smtp_user'] =    "ykhan707@gmail.com";
-			$config['smtp_pass'] =    "Demon_down";
-			$config['smtp_port'] =     465;
-			$config['_smtp_auth'] =   "TRUE";
-			$config['charset'] =      "utf-8";
-			$config['wordwrap'] =     "TRUE";
-			$config['newline']    =   "\r\n";
+			$config['protocol']       = 	  "smtp";
+			$config['smtp_host'] 	  =       "ssl://smtp.gmail.com";
+			$config['smtp_user'] 	  =       "ykhan707@gmail.com";
+			$config['smtp_pass']      =       "Demon_down";
+			$config['smtp_port']      =       465;
+			$config['_smtp_auth']     =       "TRUE";
+			$config['charset']        =       "utf-8";
+			$config['wordwrap']       =       "TRUE";
+			$config['newline']        =       "\r\n";
 			$this->email->initialize($config);
-			echo 'executed';
 			$this->email->from('ykhan707@gmail.com', 'Yakub');
 			$this->email->to($email);
 			$this->email->subject('Forget Test');
-			$this->email->message($randompass);
+			$this->email->message($messagefinal);
 			if ($this->email->send()) 
 			{
-				echo 'email send';
+				$response = array('success' => True, 'message'=>'Email has been Sent to your email please go and check and reset the password', 'linkn' => base_url().'app');
+			    echo json_encode($response);
 			}
 			else
 			{
 				echo 'Not Send';
 			}
+
 
 		}
 		else
@@ -152,4 +160,50 @@ class Login extends CI_Controller {
 			echo 'not';
 		}
 	}
+
+	public function isEmailPresent()
+	{
+		
+		$value=$this->input->post("email");
+		$validater = $this->user_add->validate_Email($value);
+		if(empty($validater))
+		{
+			
+			echo 'true';
+		}
+		else
+		{
+			
+			echo 'false';
+		}
+	}
+
+	public function checkLinkTime($id)
+	{
+		$check['user'] = $this->loginUser->linkTime($id);
+
+		print_r($check['user']);
+
+		if(!empty($check['user']))
+		{	
+		    $this->load->view('reset');
+		    $userId = $this->loginUser->changePass($check);
+		    if(!empty($userId))
+		    {
+		    	$response = array('success' => True, 'message'=>'Your password has been reset successfully Please log In again', 'linkn' => base_url().'app');
+		    }
+
+		}
+		else
+		{
+
+			echo 'link expired';
+		}
+
+
+	}
+
+	 
+
+
 }

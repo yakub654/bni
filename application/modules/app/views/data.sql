@@ -108,3 +108,13 @@ CREATE TABLE references(
 		ref_updt_on timestamp,
 		FOREIGN KEY (ref_usr_id) REFERENCES users(usr_id)
 );
+
+
+CREATE TABLE usr_forget_password (
+
+		usr_fgp_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		usr_fgpref_id int,
+		usr_fgpref_value varchar(40),
+		usr_fgp_time timestamp,
+		FOREIGN KEY (usr_fgpref_id) REFERENCES users(usr_id)
+);

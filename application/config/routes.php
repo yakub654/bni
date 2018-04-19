@@ -66,3 +66,4 @@ $route['app/tyfcb-list']								= 'app/tyfcb/tyfcb_list';
 $route['app/references']								= 'app/References/refview';
 $route['app/transaction']								= 'app/References/transview';
 $route['app/transform']								    = 'app/References/transform';
+$route['app/forget-Password/(:any)']					= 'app/Login/checkLinkTime/$1';

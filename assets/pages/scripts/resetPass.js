@@ -1,18 +1,19 @@
 $(document).ready(function() {
 
-		$('#fpassword').validate({
+		$('#Resetpass').validate({
 
 		errorClass: "my-error-class",
        
 		rules : {
-			emailforget : {
-				
-				email   : true,
-				remote :{
-					url:'app/Login/isEmailPresent',
-					type:"post"
-				},
-			}
+			password : {
+				required : true
+			
+			},
+
+			cnf_password : {
+			required : true,
+			equalTo: "#password"
+			},
 
 			
 
@@ -20,11 +21,14 @@ $(document).ready(function() {
 
 		messages : {
 
-			emailforget : {
-				
-				email    : "please enter the valid email",
-				remote   : "Email not present"
-			}
+			password : {
+			 	required   : "Please enter a password"
+			 	
+			},
+			cnf_password : {
+			 	required   : "Confirm your password",
+			 	equalTo    : "Please enter the same password as above"
+			},
 
 			
 		},
@@ -33,17 +37,19 @@ $(document).ready(function() {
 		{
 			try
 			{
-				var email    = document.getElementById('emailforget').value;
+				var password    = document.getElementById('password').value;
+				// var id          = document.getElementById('id').value;
 				
 
 				data = {
-					email:email
+					password:password,
+					
 					
 				}
 				console.log(data)
 				$.ajax({
 						type: "POST",
-	                    url: "app/Login/forgetPass", 
+	                    url: "app/Login/checkLinkTime", 
 	                    data:data,
 	                    dataType:"json",
 				success:function(response)

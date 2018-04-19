@@ -86,4 +86,7 @@ class user_add extends CI_Model{
 			return true;
 	    }
 	  }
+
+	  
+	 
 }
