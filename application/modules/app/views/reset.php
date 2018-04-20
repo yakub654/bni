@@ -48,9 +48,10 @@
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Password</label>
                     <input class="form-control form-control-solid placeholder-no-fix" type="password"  placeholder="Password" name="password" id="password" />
-                    
-                    <input type="hidden" name="id" id="id" value="" placeholder=""> 
-                    
+                    <?php foreach($user as $key) { ?>
+                       
+                    <input type="hidden" name="id" id="id" value="<?php echo $key->usr_fgpref_id ?>" placeholder=""> 
+                    <?php } ?>
                 </div>
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Confirm Password</label>

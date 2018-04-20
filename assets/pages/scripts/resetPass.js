@@ -38,18 +38,19 @@ $(document).ready(function() {
 			try
 			{
 				var password    = document.getElementById('password').value;
-				// var id          = document.getElementById('id').value;
+				var id          = document.getElementById('id').value;
 				
 
 				data = {
 					password:password,
+					id:id
 					
 					
 				}
 				console.log(data)
 				$.ajax({
 						type: "POST",
-	                    url: "app/Login/checkLinkTime", 
+	                    url: base_url +"app/Login/changePassword", 
 	                    data:data,
 	                    dataType:"json",
 				success:function(response)
@@ -62,14 +63,7 @@ $(document).ready(function() {
 					}
 					else
 					{
-						// if(response.message == '1')
-						// {
-						// 	alert('ivalid password');
-						// }
-						// else
-						// {
-						// 	alert('Not a User');
-						// }
+						alert(response.message);
 					}
 					
 				}

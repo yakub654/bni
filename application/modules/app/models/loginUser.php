@@ -34,24 +34,28 @@ class loginUser extends CI_Model{
 	  public function linkTime($id)
 	  {
 	  	    
-	  		$sql = "Select usr_fgpref_id from usr_forget_password where  usr_fgpref_value = '".$id."' and TIMEDIFF(CURTIME(),time(usr_fgp_time)) < '23:59:00' and DATEDIFF(CURDATE(),date(usr_fgp_time)) < '1' ";
+	  		$sql = "Select usr_fgpref_id from usr_forget_password where  usr_fgpref_value = '".$id."' and TIMEDIFF(CURTIME(),time(usr_fgp_time)) < '23:59:59' and DATEDIFF(CURDATE(),date(usr_fgp_time)) <= '1' ";
 	  		$query = $this->db->query($sql);
-	  		$row = $query->row();
-	  		return $row;
+	  		$result = $query->result();
+	  		return $result;  
 	  }
 
-	  public function changePass($check)
+	  public function changePass($id)
 	  {
 	  		$changeData = array(
 
-	  			'usr_password' => password_hash($this->input->post('password'),PASSWORD_BCRYPT)
+	  			'usr_password' => password_hash($this->input->post('password'),PASSWORD_BCRYPT),
+
 	  		);
 	  		
 	  	$this->db->set($changeData);
-		$this->db->where('usr_id',$check['user']->usr_fgpref_id);
+		$this->db->where('usr_id',$id);
 		$check = $this->db->update('users');
-
-		return true;
-
+		if(!empty($check))
+		{
+			return true;
+	    }
 	  }
 }
+
+// and DATEDIFF(CURDATE(),date(usr_fgp_time)) < '1' 

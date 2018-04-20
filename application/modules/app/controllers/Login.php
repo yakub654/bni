@@ -182,17 +182,11 @@ class Login extends CI_Controller {
 	{
 		$check['user'] = $this->loginUser->linkTime($id);
 
-		print_r($check['user']);
+		
 
 		if(!empty($check['user']))
 		{	
-		    $this->load->view('reset');
-		    $userId = $this->loginUser->changePass($check);
-		    if(!empty($userId))
-		    {
-		    	$response = array('success' => True, 'message'=>'Your password has been reset successfully Please log In again', 'linkn' => base_url().'app');
-		    }
-
+		    $this->load->view('reset',$check);
 		}
 		else
 		{
@@ -203,7 +197,21 @@ class Login extends CI_Controller {
 
 	}
 
-	 
+	 public function changePassword()
+	 {
+	 	$id = $this->input->post('id');
+	 	$userId = $this->loginUser->changePass($id);
+		    if(!empty($userId))
+		    {
+		    	$response = array('success' => True, 'message'=>'Your password has been reset successfully Please log In again', 'linkn' => base_url().'app');
+		    	echo json_encode($response);
+		    }
+		    else
+		    {
+		    	$response = array('success' => false, 'message'=>'Something went wrrong');
+		    	echo json_encode($response);
+		    }
+	 }
 
 
 }
